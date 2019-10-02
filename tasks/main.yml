@@ -1,0 +1,23 @@
+---
+# tasks file for role_demo
+- name: Install the latest version of Apache
+  become: true
+  yum:
+    name: httpd
+    state: present
+
+- name: Custom index.html
+  become: true
+  copy:
+    src: index.html
+    dest: /var/www/html/
+
+- name: Start service httpd, if not started
+  become: true
+  service:
+    name: httpd
+    state: started
+
+- name: Display hostname
+  debug:
+    var: ansible_fqdn
