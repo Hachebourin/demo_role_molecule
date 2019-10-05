@@ -1,0 +1,38 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: ec2
+
+lint:
+  name: yamllint
+
+platforms:
+  - name: instance
+    image: "ami-0a0cb6c7bcb2e4c51"
+    instance_type: "t2.micro"
+    vpc_subnet_id: "subnet-ffc74a85"
+
+provisioner:
+  name: ansible
+  options:
+    user: ec2-user
+
+scenario:
+  name: run-on-aws
+  test_sequence:
+    - dependency
+    - lint
+    - syntax
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - verify
+    - destroy
+
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

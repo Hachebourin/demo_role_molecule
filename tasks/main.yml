@@ -18,6 +18,5 @@
     name: httpd
     state: started
 
-- name: Display hostname
-  debug:
-    var: ansible_fqdn
+- name: Display ipv4 adress
+  debug: var=ansible_all_ipv4_addresses
