@@ -1,5 +1,8 @@
 ---
 - name: Converge
   hosts: all
+  # On rhel8 AWS
+  vars:
+    ansible_python_interpreter: "/usr/libexec/platform-python"
   roles:
     - role: demo_role_molecule
